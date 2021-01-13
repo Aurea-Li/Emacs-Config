@@ -6,28 +6,26 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-;; Org mode configuration
-;; Enable Org mode
+;; Org Mode
 (require 'org)
-;; Make Org mode work with files ending in .org
+;; Make Org mode work with files ending in .org.
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-;; The above is the default in recent emacsen
+;; The above is the default in recent emacsen.
 (setq org-todo-keywords
   '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
-(global-set-key "\C-ca" 'org-agenda)
-;; Hide structural markup elements in org-mode
+;; Hide structural markup elements in org-mode.
 (setq org-hide-emphasis-markers t)
-;; Set global bindings
+;; Set global bindings.
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; Set agenda files to be all .org files under directory
-;; ~/Notes/Org-Mode recursively
+;; ~/Notes/Org-Mode recursively.
 (setq org-agenda-files (directory-files-recursively "~/Notes/Org-Mode/" "\.org$"))
-;; Export whitespaces in org files
+;; Export whitespaces in org files.
 (setq org-export-preserve-breaks "t")
-;; Allow tab to work in embedded code blocks
+;; Allow tab to work in embedded code blocks.
 (setq org-src-tab-acts-natively t)
-;; Allow images to be resized
+;; Allow images to be resized.
 (setq org-image-actual-width nil)
 ;; Turn on visual-line-mode and adaptive-mode on for org-files
 ;; by default.
@@ -35,6 +33,18 @@
 (adaptive-wrap-prefix-mode t)
 (add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'adaptive-wrap-prefix-mode)
+
+;; Org Capture Templates
+(setq org-capture-templates '(
+    ("b" "Book Entry" entry (file+olp+datetree 
+			     "~/Notes/Org-Mode/Media.org"
+			     "Books") 
+     "* %^{Title} by %^{Author} %^g \n  %?")
+    ("j" "Journal Entry" plain (file+olp+datetree
+				"~/Notes/Org-Mode/Media.org"
+				"Journal")
+    "%?")
+))
 
 ;; Automatically load tangotango theme on startup.
 (load-theme 'tangotango t)
