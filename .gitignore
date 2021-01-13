@@ -1,0 +1,6 @@
+# No files ending with ~, which represents auto-saves in emac.
+*~
+# No files starting and ending with #, which represents lock files in emac.
+\#*\#
+# Ignore elpa packages
+epla/*
